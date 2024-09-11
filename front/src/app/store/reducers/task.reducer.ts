@@ -43,6 +43,11 @@ export const taskReducer =  createReducer<TaskState>(
             ...state,
             tasks: action.payload
         }
-    })
+    }),
+
+    on(TaskActions.createTaskSuccess, (state, action): TaskState => ({
+        ...state,
+        tasks: [...state.tasks, action.payload]
+    }))
 
 )

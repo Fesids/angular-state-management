@@ -1,13 +1,13 @@
 package com.task.task.controller;
 
 
+import com.task.task.dto.TaskDto;
 import com.task.task.models.Task;
 import com.task.task.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,6 +18,15 @@ public class TaskController {
 
     @Autowired
     private TaskRepository taskRepository;
+
+    @PostMapping("")
+    public ResponseEntity<Task> create(@RequestBody TaskDto taskDto){
+        var newTask = new Task(taskDto);
+
+
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(taskRepository.save(newTask));
+    }
 
     @GetMapping("")
     public List<Task> getTasks() {

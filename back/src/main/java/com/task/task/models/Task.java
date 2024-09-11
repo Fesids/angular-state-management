@@ -1,6 +1,7 @@
 package com.task.task.models;
 
 
+import com.task.task.dto.TaskDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,4 +25,10 @@ public class Task {
     private String description;
 
     private boolean completed;
+
+    public Task(TaskDto taskDto){
+        this.title = taskDto.title();
+        this.description = taskDto.description();
+        this.completed = taskDto.completed();
+    }
 }

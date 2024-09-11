@@ -17,5 +17,10 @@ export class TaskService{
         )
     }
 
+    createTask(newTask: Omit<Task, "id">): Observable<Task>{
+        return this.apiService.post("/tasks", newTask);
+    }
+
+
 
 }

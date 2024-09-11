@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { TaskListComponent } from "../../components/task/task-list.component";
+import { TaskListComponent } from "../../components/task/list/task-list.component";
 
 @Component({
     selector: "app-home",
