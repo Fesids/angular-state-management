@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+  mysql-database:
+    image: mysql:latest
+    container_name: mysql-database-container
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 67890000
+      MYSQL_DATABASE: spring_db
+
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      retries: 5
+
+
+  spring-app:
+    build: ./back
+    container_name: spring-app-container
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-database-container:3306/spring_db
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 67890000
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysql-database:
+        condition: service_healthy
+
+
+  angular-app:
+    build: ./front
+    container_name: angular-container
+    ports:
+      - "80:80"
+    depends_on:
+      - spring-app
+
+volumes:
+  mysql-data:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
