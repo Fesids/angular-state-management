@@ -4,7 +4,8 @@
         <div>
 
             @for (task of tasks; track task.id){
-                <h3>{{ task.title }}</h3>
+                <!--<h3>{{ task.title }}</h3>-->
+                <app-task-list-detail [title]="task.title"></app-task-list-detail>
             }
 
         </div>
